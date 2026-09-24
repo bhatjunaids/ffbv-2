@@ -234,6 +234,12 @@ var RAMP=['--s0','--s1','--s2','--s3','--s4','--s5','--s6','--s7'];
 var WHERE=['Separate classroom','Seated with Grade 1 children','In the co-located anganwadi','Not asked'];
 var YN=['Yes','No'];
 var SRK = DATA.meta.kpis;
+
+/* Enrolment ladder: "more than 10" up to "more than 20", one tick each.
+   Cumulative, not exclusive — ticking more than one passes on the lowest. */
+var ENR_T=[], ENR_O=[];
+for(var _e=10;_e<=20;_e++){ ENR_T.push(_e); ENR_O.push('More than '+_e); }
+var ENR_DEF=[ENR_T.indexOf(10)];
 function grp(id,i){ for(var j=0;j<SRK.length;j++) if(SRK[j].id===id) return SRK[j].groups[i]; }
 
 /* ---------------- definitions ---------------- */
@@ -247,8 +253,8 @@ var SSD_KPIS=[
  {id:'S4',name:'Stationery & Learning Material',short:'Stationery & material',
   groups:[{f:'xs',q:'Stationery & learning material available',o:YN}],def:{xs:[0]}},
  {id:'S5',name:'Enrolment 5-6',short:'Enrolment',
-  groups:[{f:'xe',q:'Children aged 5-6 enrolled',thresholds:[8,7,6,5],
-    o:['More than 8','More than 7','More than 6','More than 5']}],def:{xe:[0]}}
+  groups:[{f:'xe',q:'Children aged 5-6 enrolled',thresholds:ENR_T,o:ENR_O}],
+  def:{xe:ENR_DEF.slice()}}
 ];
 var SR_KPIS=[
  {id:'K1',name:'Dedicated & Safe Learning Space',short:'Learning space',
@@ -270,8 +276,8 @@ var SR_KPIS=[
   groups:[{f:'nm',q:'Educator deployed',o:['No educator name recorded','Educator name recorded']},
           {f:'ti',q:'What the educator was told about school timings',o:grp('K8',1).o}],def:{nm:[1]}},
  {id:'K9',name:'Enrolment & Attendance',short:'Enrolment',
-  groups:[{f:'e56',q:'Children aged 5-6 enrolled',thresholds:[8,7,6,5,0],
-    o:['More than 8','More than 7','More than 6','More than 5','More than 0 (any)']}],def:{e56:[0]}}
+  groups:[{f:'e56',q:'Children aged 5-6 enrolled',thresholds:ENR_T,o:ENR_O}],
+  def:{e56:ENR_DEF.slice()}}
 ];
 
 var selSSD={}, selSR={};
