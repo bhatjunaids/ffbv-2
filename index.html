@@ -236,11 +236,11 @@ var WHERE=['Separate classroom','Seated with Grade 1 children','In the co-locate
 var YN=['Yes','No'];
 var SRK = DATA.meta.kpis;
 
-/* Enrolment ladder: "more than 10" up to "more than 20", one tick each.
+/* Enrolment ladder: "more than 5" up to "more than 20", one tick each.
    Cumulative, not exclusive — ticking more than one passes on the lowest. */
 var ENR_T=[], ENR_O=[];
-for(var _e=10;_e<=20;_e++){ ENR_T.push(_e); ENR_O.push('More than '+_e); }
-var ENR_DEF=[ENR_T.indexOf(10)];
+for(var _e=5;_e<=20;_e++){ ENR_T.push(_e); ENR_O.push('More than '+_e); }
+var ENR_DEF=[ENR_T.indexOf(8)];
 function grp(id,i){ for(var j=0;j<SRK.length;j++) if(SRK[j].id===id) return SRK[j].groups[i]; }
 
 /* ---------------- definitions ---------------- */
